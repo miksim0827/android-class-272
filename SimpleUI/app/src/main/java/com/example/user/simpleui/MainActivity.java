@@ -3,7 +3,9 @@ package com.example.user.simpleui;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -13,6 +15,7 @@ public class MainActivity extends AppCompatActivity {
     TextView textView;
     EditText editText;
     RadioGroup radioGroup;
+    ListView listView;
 
     String drink= "Black Tea";
 
@@ -24,6 +27,9 @@ public class MainActivity extends AppCompatActivity {
         textView = (TextView)findViewById(R.id.textView);
         editText = (EditText)findViewById(R.id.editText);
         radioGroup = (RadioGroup)findViewById(R.id.radioGroup);
+        listView = (ListView)findViewById(R.id.listView);
+
+
 
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -38,13 +44,23 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-    }
-    public void click(View view)
-    {
-        String text = editText.getText().toString();
-        text = text + " Order " + drink;
-        textView.setText(text);
 
-        editText.setText("");
+        setupListView();
+
+        private void setListView()
+    {
+        String[] data = new String[]("1","2","3","4","5","6","7","8");
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1);
+        listView.setAdapter(adapter);
     }
+    }
+        public void click(View view)
+        {
+            String text = editText.getText().toString();
+            text = text + " Order " + drink;
+            textView.setText(text);
+
+            editText.setText("");
+        }
 }

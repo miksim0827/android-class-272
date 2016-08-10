@@ -27,8 +27,7 @@
         android:onClick="click"
         android:textSize="18dp"
         android:textStyle="bold|italic"
-        android:layout_below="@+id/radioGroup"
-        android:background="@drawable/buttont" />
+        android:layout_below="@+id/radioGroup" />
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -52,7 +51,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/BlackTeaRadioButton"
             android:checked="true"
-            android:background="@drawable/blacktea" />
+            android:text="BlackTea" />
 
         <RadioButton
             android:layout_width="wrap_content"
@@ -60,8 +59,16 @@
             android:id="@+id/GreenTeaRadioButton"
             android:layout_gravity="center_horizontal"
             android:checked="false"
-            android:background="@drawable/greentea" />
+            android:text="GreenTea" />
 
     </RadioGroup>
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/listView"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="false"
+        android:layout_below="@+id/button" />
 
 </RelativeLayout>
