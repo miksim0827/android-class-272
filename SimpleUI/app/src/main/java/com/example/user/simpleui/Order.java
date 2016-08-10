@@ -5,6 +5,6 @@ package com.example.user.simpleui;
  */
 public class Order {
     String note;
-    String storelnfo;
+    String storeInfo;
     String drink;
 }
