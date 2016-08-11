@@ -1,5 +1,6 @@
 package com.example.user.simpleui;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -38,7 +39,7 @@ public class DrinkMenuActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Drink drink = (Drink)parent.getAdapter().getItem(position);
-                total += drink.mPrice;
+                total += drink.lPrice;
                 totalTextView.setText(String.valueOf(total));
             }
         });
@@ -66,6 +67,15 @@ public class DrinkMenuActivity extends AppCompatActivity {
     {
         DrinkAdapter adapter = new DrinkAdapter(this, drinkList);
         drinkMenuListView.setAdapter(adapter);
+    }
+
+    public void done(View view)
+    {
+        Intent intent = new Intent();
+        intent.putExtra("result",String.valueOf(total));
+
+        setResult(RESULT_OK, intent);
+        finish();
     }
 
     @Override
