@@ -1,23 +1,21 @@
 package com.example.user.simpleui;
 
 import android.content.Intent;
-import android.preference.PreferenceFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.MenuInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.SimpleAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.sql.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -49,11 +47,11 @@ public class MainActivity extends AppCompatActivity {
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-                if(checkedId == R.id.BlackTeaRadioButton)
+                if(checkedId == R.id.blackTeaRadioButton)
                 {
                     drink = "Black Tea";
                 }
-                else if (checkedId == R.id.GreenTeaRadioButton)
+                else if (checkedId == R.id.greenTeaRadioButton)
                 {
                     drink = "Green Tea";
                 }
@@ -125,12 +123,12 @@ public class MainActivity extends AppCompatActivity {
         setupListView();
     }
 
-        public void goToMenu(View view)
-        {
-            Intent intent = new Intent();
-            intent.setClass(this,DrinkMenuActivity.class);
-            startActivity(intent);
-        }
+    public void goToMenu(View view)
+    {
+        Intent intent = new Intent();
+        intent.setClass(this, DrinkMenuActivity.class);
+        startActivity(intent);
+    }
 
     @Override
     protected void onStart() {

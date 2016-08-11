@@ -5,19 +5,18 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New Text"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Note"
         android:id="@+id/noteTextView"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:textSize="18dp" />
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New Text"
+        android:text="store"
         android:id="@+id/storeInfoTextView"
-        android:textSize="18dp"
         android:layout_below="@+id/noteTextView"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
@@ -25,10 +24,10 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New Text"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Drink"
         android:id="@+id/drinkTextView"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:textSize="18dp" />
+        android:layout_alignParentEnd="true" />
 </RelativeLayout>

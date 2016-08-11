@@ -1,4 +1,4 @@
 # android-class-272
-This project for android class 274 tutorial.
+This project for android class 272 tutorial
 
-license For any purpose.
+license: For any purpose

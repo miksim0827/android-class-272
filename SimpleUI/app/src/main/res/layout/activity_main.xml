@@ -13,62 +13,65 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Hello Android!"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
         android:id="@+id/textView"
         android:textSize="24dp"
-        android:textColor="#4481ea" />
+        android:textColor="#01ff63" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Click"
         android:id="@+id/button"
-        android:layout_alignWithParentIfMissing="false"
-        android:nestedScrollingEnabled="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
         android:onClick="click"
         android:textSize="24dp"
         android:layout_below="@+id/spinner" />
+
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/editText"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
         android:layout_below="@+id/textView" />
 
     <RadioGroup
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
         android:orientation="horizontal"
-        android:layout_marginTop="18dp"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
         android:id="@+id/radioGroup"
-        android:layout_below="@+id/editText">
+        android:layout_below="@+id/editText"
+        android:visibility="gone">
 
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/BlackTeaRadioButton"
-            android:checked="true"
-            android:text="BlackTea" />
+            android:text="Black Tea"
+            android:id="@+id/blackTeaRadioButton"
+            android:checked="true" />
 
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/GreenTeaRadioButton"
+            android:text="Green Tea"
+            android:id="@+id/greenTeaRadioButton"
             android:layout_gravity="center_horizontal"
-            android:checked="false"
-            android:text="GreenTea" />
-
+            android:checked="false" />
     </RadioGroup>
 
     <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/listView"
+        android:layout_below="@+id/button"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="false"
-        android:layout_below="@+id/button" />
+        android:layout_alignParentStart="true" />
 
     <Spinner
         android:layout_width="wrap_content"
@@ -83,10 +86,9 @@
         android:layout_height="wrap_content"
         android:text="Menu"
         android:id="@+id/button2"
-        android:layout_alignBottom="@+id/button"
+        android:layout_alignTop="@+id/button"
         android:layout_toRightOf="@+id/button"
         android:layout_toEndOf="@+id/button"
         android:textSize="24dp"
-        android:onClick="MenuClick" />
-
+        android:onClick="goToMenu" />
 </RelativeLayout>
