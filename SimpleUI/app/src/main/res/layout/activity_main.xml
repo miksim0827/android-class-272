@@ -25,8 +25,7 @@
         android:layout_alignWithParentIfMissing="false"
         android:nestedScrollingEnabled="true"
         android:onClick="click"
-        android:textSize="18dp"
-        android:textStyle="bold|italic"
+        android:textSize="24dp"
         android:layout_below="@+id/spinner" />
     <EditText
         android:layout_width="match_parent"
@@ -78,5 +77,16 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/radioGroup" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Menu"
+        android:id="@+id/button2"
+        android:layout_alignBottom="@+id/button"
+        android:layout_toRightOf="@+id/button"
+        android:layout_toEndOf="@+id/button"
+        android:textSize="24dp"
+        android:onClick="MenuClick" />
 
 </RelativeLayout>

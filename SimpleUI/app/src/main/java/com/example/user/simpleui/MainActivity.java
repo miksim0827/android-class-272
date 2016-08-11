@@ -1,7 +1,11 @@
 package com.example.user.simpleui;
 
+import android.content.Intent;
+import android.preference.PreferenceFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.MenuInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -55,16 +59,19 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Order order = (Order)parent.getAdapter().getItem(position);
-                Toast.makeText(MainActivity.this,order.note,Toast.LENGTH_LONG).show();
+                Order order = (Order) parent.getAdapter().getItem(position);
+                Toast.makeText(MainActivity.this, order.note, Toast.LENGTH_LONG).show();
             }
         });
 
         setupListView();
         setupSpinner();
+
+        Log.d("DEBUG", "MainActivity OnCreate");
     }
 
     private void setupListView()
@@ -116,5 +123,48 @@ public class MainActivity extends AppCompatActivity {
 
         data.add(order);
         setupListView();
+    }
+
+        public void goToMenu(View view)
+        {
+            Intent intent = new Intent();
+            intent.setClass(this,DrinkMenuActivity.class);
+            startActivity(intent);
+        }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.d("DEBUG", "MainActivity OnStart");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.d("DEBUG", "MainActivity OnResume");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.d("DEBUG", "MainActivity OnPause");
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.d("DEBUG", "MainActivity OnStop");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.d("DEBUG", "MainActivity OnDestroy");
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        Log.d("DEBUG", "MainActivity OnRestart");
     }
 }
