@@ -1,6 +1,11 @@
 package com.example.user.simpleui;
 
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.net.Uri;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,7 +17,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DrinkMenuActivity extends AppCompatActivity {
+public class DrinkMenuActivity extends AppCompatActivity implements DrinkOrderDialog.OnFragmentInteractionListener{
 
     ListView drinkMenuListView;
     TextView totalTextView;
@@ -23,6 +28,7 @@ public class DrinkMenuActivity extends AppCompatActivity {
     int[] imageIds = {R.drawable.drink1, R.drawable.drink2, R.drawable.drink3, R.drawable.drink4};
 
     int total = 0;
+    String s = "取消菜單" ;
     List<Drink> drinkList = new ArrayList<>();
 
     @Override
@@ -39,8 +45,9 @@ public class DrinkMenuActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Drink drink = (Drink)parent.getAdapter().getItem(position);
-                total += drink.lPrice;
-                totalTextView.setText(String.valueOf(total));
+//                total += drink.lPrice;
+//                totalTextView.setText(String.valueOf(total));
+                showDrinkOrderDialog(drink);
             }
         });
         totalTextView = (TextView)findViewById(R.id.totalTextView);
@@ -77,6 +84,28 @@ public class DrinkMenuActivity extends AppCompatActivity {
         setResult(RESULT_OK, intent);
         finish();
     }
+  /* public void cancel (View view)
+    {
+        Intent intent = new Intent();
+        intent.putExtra("result",s);
+
+        setResult(RESULT_OK, intent);
+        finish();
+    } */
+
+    private void  showDrinkOrderDialog(Drink drink)
+    {
+        FragmentManager fragmentManager = getFragmentManager();
+
+        FragmentTransaction ft = fragmentManager.beginTransaction();
+
+        DrinkOrderDialog dialog = DrinkOrderDialog.newInstance("","");
+
+        ft.replace(R.id.root,dialog);
+
+        ft.commit();
+    }
+
 
     @Override
     protected void onStart() {
@@ -112,5 +141,10 @@ public class DrinkMenuActivity extends AppCompatActivity {
     protected void onRestart() {
         super.onRestart();
         Log.d("DEBUG", "DrinkMenuActivity OnRestart");
+    }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
     }
 }

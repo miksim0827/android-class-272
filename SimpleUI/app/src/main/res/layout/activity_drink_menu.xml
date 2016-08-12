@@ -7,7 +7,8 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.user.simpleui.DrinkMenuActivity">
+    tools:context="com.example.user.simpleui.DrinkMenuActivity"
+    android:id="@+id/root">
 
     <ListView
         android:layout_width="match_parent"
@@ -43,9 +44,19 @@
         android:layout_height="wrap_content"
         android:text="Done"
         android:id="@+id/button3"
+        android:onClick="done"
+        android:layout_alignTop="@+id/button4"
+        android:layout_toLeftOf="@+id/button4"
+        android:layout_toStartOf="@+id/button4" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="CANCEL"
+        android:id="@+id/button4"
+        android:onClick="cancel"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:onClick="done" />
+        android:layout_alignRight="@+id/drinkMenuListView"
+        android:layout_alignEnd="@+id/drinkMenuListView" />
 
 </RelativeLayout>

@@ -142,6 +142,7 @@ public class MainActivity extends AppCompatActivity {
                 String result = data.getStringExtra("result");
                 Toast.makeText(this, result, Toast.LENGTH_LONG).show();
             }
+
         }
     }
 
