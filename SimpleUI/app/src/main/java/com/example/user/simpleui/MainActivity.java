@@ -15,6 +15,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.lang.ref.ReferenceQueue;
 import java.sql.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -142,7 +143,6 @@ public class MainActivity extends AppCompatActivity {
                 String result = data.getStringExtra("result");
                 Toast.makeText(this, result, Toast.LENGTH_LONG).show();
             }
-
         }
     }
 

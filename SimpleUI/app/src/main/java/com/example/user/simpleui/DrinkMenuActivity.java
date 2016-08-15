@@ -5,7 +5,6 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.net.Uri;
-import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -28,7 +27,6 @@ public class DrinkMenuActivity extends AppCompatActivity implements DrinkOrderDi
     int[] imageIds = {R.drawable.drink1, R.drawable.drink2, R.drawable.drink3, R.drawable.drink4};
 
     int total = 0;
-    String s = "取消菜單" ;
     List<Drink> drinkList = new ArrayList<>();
 
     @Override
@@ -45,17 +43,16 @@ public class DrinkMenuActivity extends AppCompatActivity implements DrinkOrderDi
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Drink drink = (Drink)parent.getAdapter().getItem(position);
-//                total += drink.lPrice;
+//                total+=drink.mPrice;
 //                totalTextView.setText(String.valueOf(total));
                 showDrinkOrderDialog(drink);
             }
         });
-        totalTextView = (TextView)findViewById(R.id.totalTextView);
+
         setupDrinkMenu();
 
         Log.d("DEBUG", "DrinkMenuActivity OnCreate");
     }
-
 
     private void setData()
     {
@@ -79,33 +76,25 @@ public class DrinkMenuActivity extends AppCompatActivity implements DrinkOrderDi
     public void done(View view)
     {
         Intent intent = new Intent();
-        intent.putExtra("result",String.valueOf(total));
+        intent.putExtra("result", String.valueOf(total));
 
         setResult(RESULT_OK, intent);
         finish();
     }
-  /* public void cancel (View view)
-    {
-        Intent intent = new Intent();
-        intent.putExtra("result",s);
 
-        setResult(RESULT_OK, intent);
-        finish();
-    } */
-
-    private void  showDrinkOrderDialog(Drink drink)
+    private void showDrinkOrderDialog(Drink drink)
     {
         FragmentManager fragmentManager = getFragmentManager();
 
         FragmentTransaction ft = fragmentManager.beginTransaction();
 
-        DrinkOrderDialog dialog = DrinkOrderDialog.newInstance("","");
+        DrinkOrderDialog dialog = DrinkOrderDialog.newInstance(drink);
 
-        ft.replace(R.id.root,dialog);
-
-        ft.commit();
+//        ft.replace(R.id.root, dialog);
+//
+//        ft.commit();
+        dialog.show(ft, "DrinkOrderDialog");
     }
-
 
     @Override
     protected void onStart() {
