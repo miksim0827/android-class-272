@@ -102,26 +102,6 @@ public class MainActivity extends AppCompatActivity {
         setupOrderHistory();
         setupListView();
         setupSpinner();
-        ParseObject testObject = new ParseObject("TestObject");
-        testObject.put("foo", "bar");   //把bar變數放到foo資料
-        testObject.saveInBackground(new SaveCallback() {
-            @Override
-            public void done(ParseException e) {
-                if (e == null) {
-                    Toast.makeText(MainActivity.this, "Succes", Toast.LENGTH_LONG).show();
-                }
-            }
-        });  //上傳物件
-        ParseQuery<ParseObject> query = new ParseQuery<ParseObject>("TestObject");
-        query.findInBackground(new FindCallback<ParseObject>() {
-            @Override
-            public void done(List<ParseObject> objects, ParseException e) {     //find data , 例外錯誤
-                if(e == null)
-                {
-                    Toast.makeText(MainActivity.this,objects.get(0).getString("foo") , Toast.LENGTH_LONG).show();       //取第0筆 foo欄位資料
-                }
-            }
-        });    //下載物件 
 
         Log.d("DEBUG", "MainActivity OnCreate");
     }

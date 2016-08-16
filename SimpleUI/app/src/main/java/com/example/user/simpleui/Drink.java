@@ -3,14 +3,21 @@ package com.example.user.simpleui;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.parse.ParseClassName;
+import com.parse.ParseObject;
+
 /**
  * Created by user on 2016/8/11.
  */
-public class Drink implements Parcelable {
-    String name;
-    int mPrice;
-    int lPrice;
+@ParseClassName("Drink")        //包裝物件
+public class Drink extends ParseObject implements Parcelable {
+    static final String NAME_COL = "name";
+    static final String MPRICE_COL = "mPrice";
+    static final String LPRICE_COL = "lPrice";
     int imageId;
+
+    public Drink() {
+    }
 
     @Override
     public int describeContents() {
@@ -19,23 +26,20 @@ public class Drink implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(this.name);
-        dest.writeInt(this.mPrice);
-        dest.writeInt(this.lPrice);
+        dest.writeString(this.getName());
+        dest.writeInt(this.getmPrice());
+        dest.writeInt(this.getlPrice());
         dest.writeInt(this.imageId);
     }
 
-    public Drink() {
-    }
-
     protected Drink(Parcel in) {
-        this.name = in.readString();
-        this.mPrice = in.readInt();
-        this.lPrice = in.readInt();
+        this.setName(in.readString());
+        this.getmPrice(in.readInt());
+        this.getlPrice(in.readInt());
         this.imageId = in.readInt();
     }
 
-    public static final Parcelable.Creator<Drink> CREATOR = new Parcelable.Creator<Drink>() {
+    public static final Creator<Drink> CREATOR = new Creator<Drink>() {
         @Override
         public Drink createFromParcel(Parcel source) {
             return new Drink(source);
@@ -46,4 +50,28 @@ public class Drink implements Parcelable {
             return new Drink[size];
         }
     };
+
+    public int getlPrice() {
+        return lPrice;
+    }
+
+    public void setlPrice(int lPrice) {
+        this.put();
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getmPrice() {
+        return mPrice;
+    }
+
+    public void setmPrice(int mPrice) {
+        this.mPrice = mPrice;
+    }
 }
