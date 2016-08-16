@@ -19,6 +19,11 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
+import com.parse.FindCallback;
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
+import com.parse.SaveCallback;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -78,12 +83,9 @@ public class MainActivity extends AppCompatActivity {
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-                if(checkedId == R.id.blackTeaRadioButton)
-                {
+                if (checkedId == R.id.blackTeaRadioButton) {
                     drink = "Black Tea";
-                }
-                else if (checkedId == R.id.greenTeaRadioButton)
-                {
+                } else if (checkedId == R.id.greenTeaRadioButton) {
                     drink = "Green Tea";
                 }
             }
@@ -98,9 +100,28 @@ public class MainActivity extends AppCompatActivity {
         });
 
         setupOrderHistory();
-
         setupListView();
         setupSpinner();
+        ParseObject testObject = new ParseObject("TestObject");
+        testObject.put("foo", "bar");   //把bar變數放到foo資料
+        testObject.saveInBackground(new SaveCallback() {
+            @Override
+            public void done(ParseException e) {
+                if (e == null) {
+                    Toast.makeText(MainActivity.this, "Succes", Toast.LENGTH_LONG).show();
+                }
+            }
+        });  //上傳物件
+        ParseQuery<ParseObject> query = new ParseQuery<ParseObject>("TestObject");
+        query.findInBackground(new FindCallback<ParseObject>() {
+            @Override
+            public void done(List<ParseObject> objects, ParseException e) {     //find data , 例外錯誤
+                if(e == null)
+                {
+                    Toast.makeText(MainActivity.this,objects.get(0).getString("foo") , Toast.LENGTH_LONG).show();       //取第0筆 foo欄位資料
+                }
+            }
+        });    //下載物件 
 
         Log.d("DEBUG", "MainActivity OnCreate");
     }
