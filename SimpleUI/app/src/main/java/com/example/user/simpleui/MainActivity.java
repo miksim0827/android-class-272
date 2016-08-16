@@ -13,17 +13,15 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RadioGroup;
-import android.widget.SimpleAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.lang.ref.ReferenceQueue;
-import java.sql.Array;
+import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
+
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -38,10 +36,11 @@ public class MainActivity extends AppCompatActivity {
     String drink = "Black Tea";
 
     ArrayList<DrinkOrder> drinkOrderList = new ArrayList<>();
-    List<Order> data = new ArrayList<>();
+    List<Order> orderList = new ArrayList<>();
 
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
         listView = (ListView)findViewById(R.id.listView);
         spinner = (Spinner)findViewById(R.id.spinner);
 
-        sharedPreferences = getSharedPreferences("UIState" , MODE_PRIVATE);
+        sharedPreferences = getSharedPreferences("UIState", MODE_PRIVATE);
         editor = sharedPreferences.edit();
 
         editText.setText(sharedPreferences.getString("editText", ""));
@@ -98,19 +97,40 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        setupOrderHistory();
+
         setupListView();
         setupSpinner();
 
         Log.d("DEBUG", "MainActivity OnCreate");
     }
 
+    private void setupOrderHistory()
+    {
+        String orderDatas = Utils.readFile(this, "history");   //this = context
+        String[] orderDataArray = orderDatas.split("\n");
+        Gson gson = new Gson();
+        for(String orderData : orderDataArray) //跑order每筆資料
+        {
+            try {
+                Order order = gson.fromJson(orderData, Order.class); //復原資料
+                if (order != null) {
+                    orderList.add(order);  //order放進orderList裡
+                }
+            }
+            catch (JsonSyntaxException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
     private void setupListView()
     {
-//        String[] data = new String[]{"1","2","3","4","5","6","7","8"};
+//        String[] orderList = new String[]{"1","2","3","4","5","6","7","8"};
 
 //        List<Map<String, String>> mapList = new ArrayList<>();
 //
-//        for(Order order : data)
+//        for(Order order : orderList)
 //        {
 //            Map<String, String> item = new HashMap<>();
 //
@@ -126,7 +146,7 @@ public class MainActivity extends AppCompatActivity {
 //
 //        SimpleAdapter adapter = new SimpleAdapter(this, mapList, R.layout.listview_order_item, from, to);
 
-        OrderAdapter adapter = new OrderAdapter(this, data);
+        OrderAdapter adapter = new OrderAdapter(this, orderList);
         listView.setAdapter(adapter);
     }
 
@@ -151,7 +171,12 @@ public class MainActivity extends AppCompatActivity {
         order.drinkOrderList = drinkOrderList;
         order.storeInfo = (String)spinner.getSelectedItem();
 
-        data.add(order);
+
+        orderList.add(order);
+
+        Gson gson = new Gson();
+        String orderData = gson.toJson(order); //物件放進去轉字串
+        Utils.writeFile(this, "history", orderData + '\n'); //orderdata 寫進檔案
 
         drinkOrderList = new ArrayList<>();
         setupListView();
@@ -160,7 +185,7 @@ public class MainActivity extends AppCompatActivity {
     public void goToMenu(View view)
     {
         Intent intent = new Intent();
-        intent.putExtra("result",drinkOrderList);
+        intent.putExtra("result", drinkOrderList);
         intent.setClass(this, DrinkMenuActivity.class);
         startActivityForResult(intent, REQUEST_CODE_DRINK_MENU_ACTIVITY);
     }
@@ -174,7 +199,6 @@ public class MainActivity extends AppCompatActivity {
             {
                 drinkOrderList = data.getParcelableArrayListExtra("result");
 //                Toast.makeText(this, result, Toast.LENGTH_LONG).show();
-
             }
         }
     }
