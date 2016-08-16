@@ -1,5 +1,6 @@
 package com.example.user.simpleui;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
@@ -34,6 +35,7 @@ public class DrinkOrderDialog extends DialogFragment {
     RadioGroup iceRadioGroup;
     RadioGroup sugarRadioGroup;
     EditText noteEditText;
+
 
     private DrinkOrder drinkOrder;
 
@@ -119,6 +121,7 @@ public class DrinkOrderDialog extends DialogFragment {
         sugarRadioGroup = (RadioGroup)contentView.findViewById(R.id.sugarRadioGroup);
         noteEditText = (EditText)contentView.findViewById(R.id.noteEditText);
 
+
         mNumberPicker.setMaxValue(100);
         mNumberPicker.setMinValue(0);
         mNumberPicker.setValue(drinkOrder.mNumber);
@@ -131,36 +134,36 @@ public class DrinkOrderDialog extends DialogFragment {
         setSelectedTextInRadioGroup(drinkOrder.ice, iceRadioGroup);
         setSelectedTextInRadioGroup(drinkOrder.sugar, sugarRadioGroup);
 
-
         return builder.create();
     }
-        private String getSelectedTextFromRadioGroup(RadioGroup radioGroup)
-        {
-            int id = radioGroup.getCheckedRadioButtonId();
-            RadioButton radioButton = (RadioButton)radioGroup.findViewById(id);
-            return  radioButton.getText().toString();
-        }
 
-        private void setSelectedTextInRadioGroup(String selectedText , RadioGroup radioGroup)
+    private String getSelectedTextFromRadioGroup(RadioGroup radioGroup)
+    {
+        int id = radioGroup.getCheckedRadioButtonId();
+        RadioButton radioButton = (RadioButton)radioGroup.findViewById(id);
+        return radioButton.getText().toString();
+    }
+
+    private void setSelectedTextInRadioGroup(String selectedText, RadioGroup radioGroup)
+    {
+        int count = radioGroup.getChildCount();
+        for(int i=0; i <count;i++)
         {
-            int count = radioGroup.getChildCount();
-            for(int i = 0; i < count ; i++)
+            View view = radioGroup.getChildAt(i);
+            if(view instanceof RadioButton)
             {
-                View view = radioGroup.getChildAt(i);
-                if(view instanceof RadioButton)
+                RadioButton radioButton = (RadioButton)view;
+                if(radioButton.getText().toString().equals(selectedText))
                 {
-                    RadioButton radioButton = (RadioButton)view;
-                    if(radioButton.getText().toString().equals(selectedText))
-                    {
-                        radioButton.setChecked(true);
-                    }
-                    else
-                    {
-                        radioButton.setChecked(false);
-                    }
+                    radioButton.setChecked(true);
+                }
+                else
+                {
+                    radioButton.setChecked(false);
                 }
             }
         }
+    }
 
     @Override
     public void onAttach(Context context) {
@@ -169,6 +172,17 @@ public class DrinkOrderDialog extends DialogFragment {
             mListener = (OnFragmentInteractionListener) context;
         } else {
             throw new RuntimeException(context.toString()
+                    + " must implement OnFragmentInteractionListener");
+        }
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        if (activity instanceof OnFragmentInteractionListener) {
+            mListener = (OnFragmentInteractionListener) activity;
+        } else {
+            throw new RuntimeException(activity.toString()
                     + " must implement OnFragmentInteractionListener");
         }
     }

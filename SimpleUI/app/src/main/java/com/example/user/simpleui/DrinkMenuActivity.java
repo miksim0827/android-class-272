@@ -91,18 +91,18 @@ public class DrinkMenuActivity extends AppCompatActivity implements DrinkOrderDi
     private void showDrinkOrderDialog(Drink drink)
     {
         DrinkOrder order = null;
-        for(DrinkOrder drinkOrder : drinkOrderList)
+        for (DrinkOrder drinkOrder : drinkOrderList)
         {
-            if(drinkOrder.drink.name.equals(drink.name))
+            if (drinkOrder.drink.name.equals(drink.name))
             {
                 order = drinkOrder;
                 break;
             }
         }
         if (order == null)
-        {
             order = new DrinkOrder(drink);
-        }
+
+
         FragmentManager fragmentManager = getFragmentManager();
 
         FragmentTransaction ft = fragmentManager.beginTransaction();
@@ -110,7 +110,7 @@ public class DrinkMenuActivity extends AppCompatActivity implements DrinkOrderDi
         DrinkOrderDialog dialog = DrinkOrderDialog.newInstance(order);
 
 //        ft.replace(R.id.root, dialog);
-
+//
 //        ft.commit();
         dialog.show(ft, "DrinkOrderDialog");
     }
@@ -155,11 +155,11 @@ public class DrinkMenuActivity extends AppCompatActivity implements DrinkOrderDi
     public void onDrinkOrderResult(DrinkOrder drinkOrder) {
         boolean flag = false;
 
-        for (int i =0 ; i < drinkOrderList.size() ; i++)
+        for (int i = 0; i < drinkOrderList.size() ; i++)
         {
-            if (drinkOrderList.get(i).drink.name.equals(drinkOrder.drink.name))
+            if(drinkOrderList.get(i).drink.name.equals(drinkOrder.drink.name))
             {
-                drinkOrderList.set(i,drinkOrder);
+                drinkOrderList.set(i, drinkOrder);
                 flag = true;
                 break;
             }
@@ -168,6 +168,7 @@ public class DrinkMenuActivity extends AppCompatActivity implements DrinkOrderDi
             drinkOrderList.add(drinkOrder);
         updateTotalTextView();
     }
+
     private void updateTotalTextView()
     {
         int total = 0;
@@ -175,6 +176,7 @@ public class DrinkMenuActivity extends AppCompatActivity implements DrinkOrderDi
         {
             total += drinkOrder.lNumber * drinkOrder.drink.lPrice + drinkOrder.mNumber * drinkOrder.drink.mPrice;
         }
+
         totalTextView.setText(String.valueOf(total));
     }
 }
