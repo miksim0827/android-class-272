@@ -3,6 +3,7 @@ package com.example.user.simpleui;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.parse.Parse;
 import com.parse.ParseClassName;
 import com.parse.ParseException;
 import com.parse.ParseFile;
@@ -28,7 +29,7 @@ public class Drink extends ParseObject implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         if(getObjectId() == null)
         {
-            dest.writeInt(0);           //沒有Object
+            dest.writeInt(0);
             dest.writeString(this.getName());
             dest.writeInt(this.getmPrice());
             dest.writeInt(this.getlPrice());
@@ -42,9 +43,11 @@ public class Drink extends ParseObject implements Parcelable {
     }
 
     public Drink() {
+        super();
     }
 
     protected Drink(Parcel in) {
+        super();
         this.setName(in.readString());
         this.setmPrice(in.readInt());
         this.setlPrice(in.readInt());
@@ -61,7 +64,7 @@ public class Drink extends ParseObject implements Parcelable {
             else
             {
                 String objectId = source.readString();
-                return  getDrinkFromCache(objectId);
+                return getDrinkFromCache(objectId);
             }
         }
 
@@ -95,14 +98,13 @@ public class Drink extends ParseObject implements Parcelable {
         this.put(LPRICE_COL, lPrice);
     }
 
-    public ParseFile getImage(){
-        return getParseFile(IMAGE_COL);
-    }
+    public ParseFile getImage(){return getParseFile(IMAGE_COL);}
 
     public static ParseQuery<Drink> getQuery()
     {
         return ParseQuery.getQuery(Drink.class);
     }
+
     public static Drink getDrinkFromCache(String objectId)
     {
         try {

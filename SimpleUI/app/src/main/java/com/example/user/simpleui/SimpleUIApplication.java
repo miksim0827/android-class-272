@@ -14,10 +14,12 @@ public class SimpleUIApplication extends Application{
         super.onCreate();
 
         ParseObject.registerSubclass(Drink.class);
+        ParseObject.registerSubclass(DrinkOrder.class);
+
         Parse.initialize(new Parse.Configuration.Builder(this)
-                .applicationId("5TzONJKwcXZzvLRTNOEC88iAvgP7rgp2SpL9Cwkq")
+                .applicationId("C2SeDf62RfpRQMvutuERRfqWGTlrVeVazgrVViF7")
                 .server("https://parseapi.back4app.com/")
-                .clientKey("mB4vIj1bCPErpyOJUfRn51n2XBqnJDxUqH0BT6PY")
+                .clientKey("7VREEc0GFWRsDYrZE88khFHkXz8meYHZvTHpE4Tx")
                 .build()
         );
     }
