@@ -27,7 +27,7 @@ public class DrinkOrder extends ParseObject implements Parcelable {
         super();
         this.setDrink(drink);
     }
-    
+
     public DrinkOrder()
     {
         super();

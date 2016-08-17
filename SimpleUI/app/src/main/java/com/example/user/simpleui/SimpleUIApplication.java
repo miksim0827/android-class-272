@@ -15,6 +15,7 @@ public class SimpleUIApplication extends Application{
 
         ParseObject.registerSubclass(Drink.class);
         ParseObject.registerSubclass(DrinkOrder.class);
+        ParseObject.registerSubclass(Order.class);
 
         Parse.initialize(new Parse.Configuration.Builder(this)
                 .applicationId("C2SeDf62RfpRQMvutuERRfqWGTlrVeVazgrVViF7")
