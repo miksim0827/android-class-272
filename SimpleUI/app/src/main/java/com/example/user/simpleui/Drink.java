@@ -122,20 +122,20 @@ public class Drink extends ParseObject implements Parcelable {
 
     public static void getDrinksFromLocalThenRemote(final FindCallback<Drink> callback)
     {
-        getQuery().fromLocalDatastore().findInBackground(callback);
-        getQuery().findInBackground(new FindCallback<Drink>() {
+        getQuery().fromLocalDatastore().findInBackground(callback);     //update listview
+        getQuery().findInBackground(new FindCallback<Drink>() {          //new findcallback 另外做 資料存在local
             @Override
             public void done(final List<Drink> list, ParseException e) {
                 if(e==null)
                 {
-                    unpinAllInBackground("Drink", new DeleteCallback() {
+                    unpinAllInBackground("Drink", new DeleteCallback() {            //with local data compare
                         @Override
                         public void done(ParseException e) {
                             pinAllInBackground("Drink", list);
                         }
                     });
                 }
-                callback.done(list, e);
+                callback.done(list, e);             //DrinkMenuAcitivy (low77)
 
             }
         });
