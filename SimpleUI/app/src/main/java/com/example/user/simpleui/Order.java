@@ -2,7 +2,6 @@ package com.example.user.simpleui;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.text.ParcelableSpan;
 
 import com.parse.FindCallback;
 import com.parse.ParseClassName;
@@ -10,7 +9,7 @@ import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
-import java.util.ArrayList;
+import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.List;
 

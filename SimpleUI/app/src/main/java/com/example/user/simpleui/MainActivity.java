@@ -189,11 +189,11 @@ public class MainActivity extends AppCompatActivity {
 //        Gson gson = new Gson();
 //        String orderData = gson.toJson(order);
 //        Utils.writeFile(this, "history", orderData + '\n');
-        order.saveEventually(new SaveCallback() {     //資料上傳
+        order.saveEventually(new SaveCallback() {
             @Override
-            public void done(ParseException e) {            //沒網路就儲存
+            public void done(ParseException e) {
                 if(e!=null)
-                    Toast.makeText(MainActivity.this,"Order Failed",Toast.LENGTH_LONG).show();
+                    Toast.makeText(MainActivity.this, "Order Failed", Toast.LENGTH_LONG).show();
             }
         });
         order.pinInBackground("Order");

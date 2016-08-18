@@ -29,9 +29,7 @@ public class DrinkOrder extends ParseObject implements Parcelable {
     }
 
     public DrinkOrder()
-    {
-        super();
-    }
+    {super();}
 
     @Override
     public int describeContents() {
