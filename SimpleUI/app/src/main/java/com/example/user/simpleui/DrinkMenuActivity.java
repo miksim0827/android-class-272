@@ -74,12 +74,12 @@ public class DrinkMenuActivity extends AppCompatActivity implements DrinkOrderDi
 //            drink.imageId = imageIds[i];
 //            drinkList.add(drink);
 //        }
-        Drink.getQuery().findInBackground(new FindCallback<Drink>() {
+        Drink.getDrinkFromLocalThenRemote(new FindCallback<Drink>() {
             @Override
-            public void done(List<Drink> objects, ParseException e) {
+            public void done(List<Drink> objects, ParseException e) {           //from cloud drive
                 if(e==null)
                 {
-                    drinkList = objects;
+                    drinkList = objects;                //update listview
                     setupDrinkMenu();
                 }
             }
