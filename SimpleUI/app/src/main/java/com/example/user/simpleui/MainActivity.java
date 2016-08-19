@@ -166,7 +166,7 @@ public class MainActivity extends AppCompatActivity {
     private void setupSpinner()
     {
         String[] storeInfo = getResources().getStringArray(R.array.storeInfo);
-        ParseQuery<ParseObject> parsrQuery = new ParseQuery<ParseObject>("StoreInfo");
+//        ParseQuery<ParseObject> parsrQuery = new ParseQuery<ParseObject>("StoreInfo");
 //        parsrQuery.findInBackground(new FindCallback<ParseObject>() {
 //            @Override
 //            public void done(List<ParseObject> objets, ParseException e) {
@@ -176,7 +176,7 @@ public class MainActivity extends AppCompatActivity {
 //                    object.getString("name") + "," + object.get("address");
 //                }
 //            }
-//        })
+//        });
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, storeInfo);
         spinner.setAdapter(adapter);
     }
