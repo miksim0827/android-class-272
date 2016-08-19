@@ -166,6 +166,17 @@ public class MainActivity extends AppCompatActivity {
     private void setupSpinner()
     {
         String[] storeInfo = getResources().getStringArray(R.array.storeInfo);
+        ParseQuery<ParseObject> parsrQuery = new ParseQuery<ParseObject>("StoreInfo");
+//        parsrQuery.findInBackground(new FindCallback<ParseObject>() {
+//            @Override
+//            public void done(List<ParseObject> objets, ParseException e) {
+//                List<String> storeInfoList = new ArrayList<String>();
+//                for(ParseObject object : objets)
+//                {
+//                    object.getString("name") + "," + object.get("address");
+//                }
+//            }
+//        })
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, storeInfo);
         spinner.setAdapter(adapter);
     }
@@ -189,9 +200,9 @@ public class MainActivity extends AppCompatActivity {
 //        Gson gson = new Gson();
 //        String orderData = gson.toJson(order);
 //        Utils.writeFile(this, "history", orderData + '\n');
-        order.saveEventually(new SaveCallback() {           //資料上傳
+        order.saveEventually(new SaveCallback() {
             @Override
-            public void done(ParseException e) {             //沒網路就儲存
+            public void done(ParseException e) {
                 if(e!=null)
                     Toast.makeText(MainActivity.this, "Order Failed", Toast.LENGTH_LONG).show();
             }
